@@ -39,13 +39,13 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
         System.out.println("channelRead0"+ msg);
         Channel channel = channelHandlerContext.channel();
         String message = " 用户 " + channel.remoteAddress()+" 发送了消息： "+ msg + simpleFormatter.format(new Date())+"\n";
-        channels.forEach(channel1 -> {
-            if(channel1 != channel){
-                channel1.writeAndFlush(message);
-            }else {
-                channel.writeAndFlush("【已发送消息】："+ msg+ simpleFormatter.format(new Date())+"\n");
-            }
-        });
+//        channels.forEach(channel1 -> {
+//            if(channel1 != channel){
+//                channel1.writeAndFlush(message);
+//            }else {
+//                channel.writeAndFlush("【已发送消息】："+ msg+ simpleFormatter.format(new Date())+"\n");
+//            }
+//        });
         System.out.println(channel.remoteAddress()+" 发送了消息： "+ msg + simpleFormatter.format(new Date())+"\n");
     }
 

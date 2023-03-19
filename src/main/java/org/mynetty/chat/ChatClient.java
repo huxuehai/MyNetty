@@ -43,11 +43,27 @@ public class ChatClient {
             ChannelFuture channelFuture = bootstrap.connect("127.0.0.1", 9000).sync();
             Channel channel = channelFuture.channel();
             System.out.println(" 用户 " + channel.localAddress()+" 上线了，  于"+ simpleFormatter.format(new Date())+"\n" );
-            Scanner scanner = new Scanner(System.in);
-            while(scanner.hasNextLine()){
-                String s = scanner.nextLine();
-                channel.writeAndFlush(s);
+//            Scanner scanner = new Scanner(System.in);
+//            while(scanner.hasNextLine()){
+//                String s = scanner.nextLine();
+//                channel.writeAndFlush(s);
+//            }
+            for (int i = 0; i < 50; i++) {
+                channel.writeAndFlush("验证，粘包、拆包");
+                /*
+                * 客户端收到的消息，说明 数据包被 粘了，并且又被拆了
+/127.0.0.1:61333 发送了消息： 验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包2023-03-19 12:29:34
+
+/127.0.0.1:61333 发送了消息： 验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包2023-03-19 12:29:34
+
+/127.0.0.1:61333 发送了消息： 验证，粘包、拆包验证，粘包、拆包2023-03-19 12:29:34
+
+/127.0.0.1:61333 发送了消息： 验证，粘包、拆包2023-03-19 12:29:34
+
+/127.0.0.1:61333 发送了消息： 验证，粘包、拆包验证，粘包、拆包验证，粘包、拆包2023-03-19 12:29:34
+                 */
             }
+
             //对关闭通道进行监听
             channelFuture.channel().closeFuture().sync();
         } catch (InterruptedException e) {
